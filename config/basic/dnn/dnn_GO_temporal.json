@@ -1,0 +1,25 @@
+{
+  "ontology": {
+    "path": "../../../data/obo/hp_20220414.obo",
+    "version": "202202"
+  },
+  "protein_list": {
+    "train": "../../../data/dataset/protein/train_protein_list_temporal_22.json",
+    "ltr": "../../../data/dataset/protein/ltr_protein_list_temporal_22.json",
+    "test": "../../../data/dataset/protein/test_protein_list_temporal_22.json"
+  },
+  "term_list": "../../../data/dataset/term/frequency/term_list_temporal_22.json",
+  "ltr_annotation": "../../../data/dataset/annotation/ltr_annotation_temporal_22.json",
+  "feature": "../../../data/feature/GO_annotation/clean/temporal/GO_ALL_annotation.json",
+  "annotation": "../../../data/dataset/annotation/train_annotation_temporal_22.json",
+  "model": "lr",
+  "hidden_nodes": 2000,
+  "learning_rate": 1e-3,
+  "epochs": 20,
+  "batch_size": 30,
+  "dropout": 0.2,
+  "result": {
+    "ltr": "../../../data/result/basic/dnn/temporal/dnn_ltr_GO_22.json",
+    "test": "../../../data/result/basic/dnn/temporal/dnn_test_GO_22.json"
+  }
+}

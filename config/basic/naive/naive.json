@@ -1,0 +1,15 @@
+{
+  "ontology": {
+    "path": "../../../data/obo/hp_20230901.obo",
+    "version": "202301"
+  },
+  "annotation": "../../../data/dataset/annotation/train_annotation_1.json",
+  "protein_list": {
+    "ltr": "../../../data/dataset/protein/ltr_test_protein_list_1_1.json",
+    "test": "../../../data/dataset/protein/ltr_test_protein_list_1_2.json"
+  },
+  "result": {
+    "ltr": "../../../data/result/basic/naive/cv/naive_ltr.json",
+    "test": "../../../data/result/basic/naive/cv/naive_test.json"
+  }
+}

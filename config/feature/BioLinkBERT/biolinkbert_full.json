@@ -1,0 +1,4 @@
+{
+  "abstract": "../../../data/feature/BioLinkBERT/raw/all_full_protein_file_swissport_2023_full.json",
+  "output": "../../../data/feature/BioLinkBERT/clean/BioLinkBERT_all_2023_full.json"
+}

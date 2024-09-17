@@ -1,0 +1,67 @@
+{
+  "ontology": {
+    "path": "../../../data/obo/hp_20230901.obo",
+    "version": "202301"
+  },
+  "protein_list": {
+    "ltr": "../../../data/dataset/protein/ltr_test_protein_list_1_1.json",
+    "test": "../../../data/dataset/protein/ltr_test_protein_list_1_2.json"
+  },
+  "term_list": "../../../data/dataset/term/frequency/term_list.json",
+  "annotation": {
+    "ltr": "../../../data/dataset/annotation/ltr_test_annotation_1_1.json",
+    "test": "../../../data/dataset/annotation/ltr_test_annotation_1_2.json"
+  },
+  "result": {
+    "ltr": [
+      "../../../data/result/basic/dnn/cv/dnn_ltr_D2V.json",
+      "../../../data/result/basic/dnn/cv/dnn_ltr_TF-IDF.json",
+      "../../../data/result/basic/dnn/cv/dnn_ltr_GO.json",
+      "../../../data/result/basic/dnn/cv/dnn_ltr_InterPro.json",
+      "../../../data/result/basic/dnn/cv/dnn_ltr_STRING.v11.5.json",
+      "../../../data/result/basic/dnn/cv/dnn_ltr_Trigram.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_D2V.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_TF-IDF.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_GO_all_annotation.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_InterPro_5.56-89.0.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_STRING.v11.5.json",
+      "../../../data/result/basic/flat/cv/flat_ltr_Trigram.json",
+      "../../../data/result/basic/naive/cv/naive_ltr.json",
+      "../../../data/result/basic/neighbor/cv/neighbor_ltr_STRING.v11.5.json"
+    ],
+    "test": [
+      "../../../data/result/basic/dnn/cv/dnn_test_D2V.json",
+      "../../../data/result/basic/dnn/cv/dnn_test_TF-IDF.json",
+      "../../../data/result/basic/dnn/cv/dnn_test_GO.json",
+      "../../../data/result/basic/dnn/cv/dnn_test_InterPro.json",
+      "../../../data/result/basic/dnn/cv/dnn_test_STRING.v11.5.json",
+      "../../../data/result/basic/dnn/cv/dnn_test_Trigram.json",
+      "../../../data/result/basic/flat/cv/flat_test_D2V.json",
+      "../../../data/result/basic/flat/cv/flat_test_TF-IDF.json",
+      "../../../data/result/basic/flat/cv/flat_test_GO_all_annotation.json",
+      "../../../data/result/basic/flat/cv/flat_test_InterPro_5.56-89.0.json",
+      "../../../data/result/basic/flat/cv/flat_test_STRING.v11.5.json",
+      "../../../data/result/basic/flat/cv/flat_test_Trigram.json",
+      "../../../data/result/basic/naive/cv/naive_test.json",
+      "../../../data/result/basic/neighbor/cv/neighbor_test_STRING.v11.5.json"
+    ]
+  },
+  "model_param": {
+    "booster": "gbtree",
+    "objective": "rank:pairwise",
+    "eval_metric": "map",
+    "max_depth": 3
+  },
+  "fit_param": {
+    "num_boost_round": 210,
+    "early_stopping_rounds": 5
+  },
+  "top": {
+    "cc": 20,
+    "cm": 10,
+    "mi": 20,
+    "pa": 250
+  },
+  "prediction": "../../../data/result/ensemble/DeepText2HPO_ensemble_cv.json",
+  "valid_prediction": "../../../data/result/ensemble/DeepText2HPO_ensemble_valid_cv.json"
+}

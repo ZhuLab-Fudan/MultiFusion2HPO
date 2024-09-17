@@ -1,0 +1,4 @@
+{
+  "abstract": "../../../data/feature/TF-IDF/raw/raw_abstract_all_full_swissport_2022.json",
+  "output": "../../../data/feature/TF-IDF/clean/TF-IDF_all_2022.json"
+}

@@ -1,0 +1,25 @@
+{
+  "raw_annotation": "../../data/annotation/clean/hpo_annotation_20230901.json",
+  "ontology": {
+    "path": "../../data/obo/hp_20230901.obo",
+    "version": "202301"
+  },
+  "k": 5,
+  "processed_annotation_prefix": {
+    "train": "../../data/dataset/annotation/train_annotation_",
+    "ltr_test": "../../data/dataset/annotation/ltr_test_annotation_"
+  },
+  "protein_list_prefix": {
+    "train": "../../data/dataset/protein/train_protein_list_",
+    "ltr_test": "../../data/dataset/protein/ltr_test_protein_list_"
+  },
+  "term_list": "../../data/dataset/term/frequency/term_list.json",
+  "frequency": [
+    {"low": 1, "high": 3, "path": "../../data/dataset/term/frequency/term_list_very_rare.json"},
+    {"low": 4, "high": 10, "path": "../../data/dataset/term/frequency/term_list_rare.json"},
+    {"low": 11, "high": 30, "path": "../../data/dataset/term/frequency/term_list_uncommon.json"},
+    {"low": 31, "high": 100, "path": "../../data/dataset/term/frequency/term_list_common.json"},
+    {"low": 101, "high": 300, "path": "../../data/dataset/term/frequency/term_list_very_common.json"},
+    {"low": 301, "high": 99999, "path": "../../data/dataset/term/frequency/term_list_extremely_common.json"}
+  ]
+}

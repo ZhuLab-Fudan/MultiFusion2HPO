@@ -1,0 +1,4 @@
+{
+  "abstract": "../../../data/feature/D2V/raw/raw_abstract_all_full_swissport_2022.json",
+  "output": "../../../data/feature/D2V/clean/D2V_all_2022.json"
+}

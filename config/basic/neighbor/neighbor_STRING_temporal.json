@@ -1,0 +1,19 @@
+{
+  "network": {
+    "path": "../../../data/feature/STRING/clean/STRING.v11.5.json",
+    "type": "weighted"
+  },
+  "protein_list": {
+    "ltr": "../../../data/dataset/protein/ltr_protein_list_temporal_22.json",
+    "test": "../../../data/dataset/protein/test_protein_list_temporal_22.json"
+  },
+  "ontology": {
+    "path": "../../../data/obo/hp_20220414.obo",
+    "version": "202202"
+  },
+  "annotation": "../../../data/dataset/annotation/train_annotation_temporal_22.json",
+  "result": {
+    "ltr": "../../../data/result/basic/neighbor/temporal/neighbor_ltr_STRING.v11.5_22.json",
+    "test": "../../../data/result/basic/neighbor/temporal/neighbor_test_STRING.v11.5_22.json"
+  }
+}

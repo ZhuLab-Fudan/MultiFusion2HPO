@@ -1,0 +1,71 @@
+{
+  "ontology": {
+    "path": "../../../data/obo/hp_20220414.obo",
+    "version": "202202"
+  },
+  "protein_list": {
+    "ltr": "../../../data/dataset/protein/ltr_protein_list_temporal_22.json",
+    "test": "../../../data/dataset/protein/test_protein_list_temporal_22.json"
+  },
+  "term_list": "../../../data/dataset/term/frequency/term_list_temporal_22.json",
+  "annotation": {
+    "ltr": "../../../data/dataset/annotation/ltr_annotation_temporal_22.json",
+    "test": "../../../data/dataset/annotation/test_annotation_temporal_22.json"
+  },
+  "result": {
+    "ltr": [
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_all_full_BioLinkBERT_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_all_full_TFIDF-D2V_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_GO_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_InterPro_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_STRING.v11.5_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_all_full_esm2_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_ltr_all_full_geneexpression_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_all_full_BioLinkBERT_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_all_full_TFIDF-D2V_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_GO_all_annotation_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_InterPro_5.51-84.0_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_STRING.v11.5_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_all_full_esm2_22.json",
+      "../../../data/result/basic/flat/temporal/flat_ltr_all_full_geneexpression_22.json",
+      "../../../data/result/basic/naive/temporal/naive_ltr_22.json",
+      "../../../data/result/basic/neighbor/temporal/neighbor_ltr_STRING.v11.5_22.json"
+    ],
+    "test": [
+      "../../../data/result/basic/dnn/temporal/dnn_test_all_full_BioLinkBERT_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_all_full_TFIDF-D2V_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_GO_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_InterPro_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_STRING.v11.5_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_all_full_esm2_22.json",
+      "../../../data/result/basic/dnn/temporal/dnn_test_all_full_geneexpression_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_all_full_BioLinkBERT_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_all_full_TFIDF-D2V_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_GO_all_annotation_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_InterPro_5.51-84.0_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_STRING.v11.5_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_all_full_esm2_22.json",
+      "../../../data/result/basic/flat/temporal/flat_test_all_full_geneexpression_22.json",
+      "../../../data/result/basic/naive/temporal/naive_test_22.json",
+      "../../../data/result/basic/neighbor/temporal/neighbor_test_STRING.v11.5_22.json"
+    ]
+  },
+  "model_param": {
+    "booster": "gbtree",
+    "objective": "rank:pairwise",
+    "eval_metric": "map",
+    "max_depth": 3
+  },
+  "fit_param": {
+    "num_boost_round": 210,
+    "early_stopping_rounds":5
+  },
+  "top": {
+    "cc": 20,
+    "cm": 10,
+    "mi": 20,
+    "pa": 250
+  },
+  "prediction": "../../../data/result/ensemble/DeepText2HPO_ensemble_all_full_esm2_geneexpression_biolinkbert_tfidfd2v_temporal_22.json",
+  "valid_prediction": "../../../data/result/ensemble/DeepText2HPO_ensemble_all_full_esm2_geneexpression_biolinkbert_tfidfd2v_temporal_valid_22.json"
+}

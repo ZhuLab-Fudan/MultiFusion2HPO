@@ -1,0 +1,19 @@
+{
+  "ontology": {
+    "path": "../../../data/obo/hp_20230901.obo",
+    "version": "202301"
+  },
+  "protein_list": {
+    "train": "../../../data/dataset/protein/train_protein_list_1.json",
+    "ltr": "../../../data/dataset/protein/ltr_test_protein_list_1_1.json",
+    "test": "../../../data/dataset/protein/ltr_test_protein_list_1_2.json"
+  },
+  "feature": "../../../data/feature/esm2/esm2_feature_2023.json",
+  "annotation": "../../../data/dataset/annotation/train_annotation_1.json",
+  "model": "lr",
+  "result": {
+    "ltr": "../../../data/result/basic/flat/cv/flat_ltr_all_full_esm2.json",
+    "test": "../../../data/result/basic/flat/cv/flat_test_all_full_esm2.json"
+  }
+}
+

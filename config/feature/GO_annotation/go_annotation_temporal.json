@@ -1,0 +1,10 @@
+{
+  "goa": "../../../data/feature/GO_annotation/raw/goa_human_20211108.gaf",
+  "ontology": "../../../data/feature/GO_annotation/raw/go_20220322.obo",
+  "feature": {
+    "bp": "../../../data/feature/GO_annotation/clean/temporal/GO_BP_annotation.json",
+    "cc": "../../../data/feature/GO_annotation/clean/temporal/GO_CC_annotation.json",
+    "mf": "../../../data/feature/GO_annotation/clean/temporal/GO_MF_annotation.json",
+    "all": "../../../data/feature/GO_annotation/clean/temporal/GO_ALL_annotation.json"
+  }
+}

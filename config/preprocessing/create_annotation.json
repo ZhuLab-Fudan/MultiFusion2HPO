@@ -1,0 +1,9 @@
+{
+  "ontology": {
+      "path": "../../data/obo/hp_20240426.obo",
+      "version": "202401"
+    },
+  "mapping": "../../data/annotation/intermediate/gene2uniprot_20240426.tsv",
+  "raw_annotation": "../../data/annotation/raw/genes_to_phenotype_20240426.txt",
+  "processed_annotation": "../../data/annotation/clean/hpo_annotation_20240426.json"
+}

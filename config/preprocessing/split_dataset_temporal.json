@@ -1,0 +1,38 @@
+{
+  "raw_annotation": {
+    "time0": "../../data/annotation/clean/hpo_annotation_20191115.json",
+    "time1": "../../data/annotation/clean/hpo_annotation_20201207.json",
+    "time2": "../../data/annotation/clean/hpo_annotation_20210413.json",
+    "time3": "../../data/annotation/clean/hpo_annotation_20220414.json",
+    "time4": "../../data/annotation/clean/hpo_annotation_20230127.json",
+    "time5": "../../data/annotation/clean/hpo_annotation_20230405.json",
+    "time6": "../../data/annotation/clean/hpo_annotation_20230721.json",
+    "time7": "../../data/annotation/clean/hpo_annotation_20230901.json",
+    "time8": "../../data/annotation/clean/hpo_annotation_20231009.json",
+    "time9": "../../data/annotation/clean/hpo_annotation_20240426.json"
+  },
+  "ontology": {
+      "path": "../../data/obo/hp_20220414.obo",
+      "version": "202202"
+  },
+  "processed_annotation": {
+    "train": "../../data/dataset/annotation/train_annotation_temporal.json",
+    "ltr": "../../data/dataset/annotation/ltr_annotation_temporal.json",
+    "test": "../../data/dataset/annotation/test_annotation_temporal.json"
+  },
+  "protein_list": {
+    "train": "../../data/dataset/protein/train_protein_list_temporal.json",
+    "ltr": "../../data/dataset/protein/ltr_protein_list_temporal.json",
+    "test": "../../data/dataset/protein/test_protein_list_temporal.json"
+  },
+  "term_list": "../../data/dataset/term/frequency/term_list_temporal.json",
+  "frequency": [
+    {"low": 1, "high": 3, "path": "../../data/dataset/term/frequency/term_list_very_rare_temporal.json"},
+    {"low": 4, "high": 10, "path": "../../data/dataset/term/frequency/term_list_rare_temporal.json"},
+    {"low": 11, "high": 30, "path": "../../data/dataset/term/frequency/term_list_uncommon_temporal.json"},
+    {"low": 31, "high": 100, "path": "../../data/dataset/term/frequency/term_list_common_temporal.json"},
+    {"low": 101, "high": 300, "path": "../../data/dataset/term/frequency/term_list_very_common_temporal.json"},
+    {"low": 301, "high": 99999, "path": "../../data/dataset/term/frequency/term_list_extremely_common_temporal.json"}
+  ]
+
+}

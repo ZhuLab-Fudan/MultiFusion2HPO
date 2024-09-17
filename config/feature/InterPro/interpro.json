@@ -1,0 +1,4 @@
+{
+  "ipr_path": "../../../data/feature/InterPro/raw/full_seq_interproscan-5.51-84.0.xml",
+  "output": "../../../data/feature/InterPro/clean/all_interpro-5.51-84.0.json"
+}

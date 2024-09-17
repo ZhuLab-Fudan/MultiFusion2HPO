@@ -1,0 +1,42 @@
+{
+  "ontology": {
+    "path": "../../data/obo/hp_20230901.obo",
+    "version": "202301"
+  },
+  "annotation": "../../data/dataset/annotation/ltr_test_annotation_1_2.json",
+  "test_protein": "../../data/dataset/protein/ltr_test_protein_list_1_2.json",
+  "term_list": "../../data/dataset/term/frequency/term_list_cv.json",
+  "frequency": {
+    "very_rare": "../../data/dataset/term/frequency/term_list_very_rare.json",
+    "rare": "../../data/dataset/term/frequency/term_list_rare.json",
+    "uncommon": "../../data/dataset/term/frequency/term_list_uncommon.json",
+    "common": "../../data/dataset/term/frequency/term_list_common.json",
+    "very_common": "../../data/dataset/term/frequency/term_list_very_common.json",
+    "extremely_common": "../../data/dataset/term/frequency/term_list_extremely_common.json"
+  },
+  "result": [
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_BioLinkBERT.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_TFIDF-D2V.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_GO.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_GOBP.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_GOCC.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_GOMF.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_InterPro.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_STRING.v11.5.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_esm2.json",
+    "../../data/result/basic/dnn/cv/dnn_test_all_full_geneexpression.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_BioLinkBERT.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_TFIDF-D2V.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_GO_BP_annotation.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_GO_CC_annotation.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_GO_MF_annotation.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_GO_all_annotation.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_InterPro_5.56-89.0.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_STRING.v11.5.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_esm2.json",
+    "../../data/result/basic/flat/cv/flat_test_all_full_geneexpression.json",
+    "../../data/result/basic/naive/cv/naive_test.json",
+    "../../data/result/basic/neighbor/cv/neighbor_test_STRING.v11.5.json",
+    "../../data/result/ensemble/DeepText2HPO_ensemble_all_full_esm2_geneexpression_biolinkbert_tfidfd2v_cv.json"
+  ]
+}

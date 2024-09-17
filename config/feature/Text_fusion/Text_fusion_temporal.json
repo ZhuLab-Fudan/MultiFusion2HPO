@@ -1,0 +1,5 @@
+{
+    "file1": "../../../data/feature/TF-IDF/clean/TF-IDF_titleabstract_all_full_2021.json",
+    "file2": "../../../data/feature/D2V/clean/D2V_titleabstract_all_full_2021.json",
+    "output": "../../../data/feature/Text_fusion/clean/TFIDF-D2V-2021.json"
+  }
