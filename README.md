@@ -1,131 +1,129 @@
 # MultiFusion2HPO
 
-## 如何运行？
+## How To Run？
 
-注：请在开始下面步骤前，在~/.bashrc文件的最后一行加上：
+Note: Please add the last line of the ~/.bashrc file before starting the following steps:
 
-export PYTHONPATH=${PYTHONPATH}:[MultiFusion2HPO的目录位置]
+export PYTHONPATH=${PYTHONPATH}:[Directory location of MultiFusion2HPO]
 
 
-### 第一步：预处理(Pre-processing)
+### Step 1: Pre-processing
 
-1. 从http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/下载基因-HPO标注文件
+1. Download the Gene-HPO Annotation file from http://compbio.charite.de/jenkins/job/hpo.annotations.monthly/
 
-ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt到目录data/annotation/raw。然后，运行src/preprocessing/extract_gene_id.py以提取文件的第一列（即entrez gene id），并将其写入一个.txt文件。接着，上传该文件内容到Uniprot ID Mapping Tool (http://www.uniprot.org/mapping/)，选择选项From: Entrez Gene (Gene ID)和To: UniProtKB，然后点击Submit按钮。在新的窗口中，选择左栏的Filter by为Reviewed Swiss-Prot，并点击页面中间的Download按钮，选择Format: Tab-separated并点击Go下载映射文件。将映射文件放入data/annotation/intermediate中，并更名为gene2uniprot.txt。
+ALL_SOURCES_ALL_FREQUENCIES_genes_to_phenotype.txt to the directory data/annotation/raw. Then, run src/preprocessing/extract_gene_id.py to extract the first column of the file (the entrez gene id) and write it to a .txt file. Next, upload the contents of this file to the Uniprot ID Mapping Tool (http://www.uniprot.org/mapping/), select the options From: Entrez Gene (Gene ID) and To: UniProtKB, and click the Submit button. In the new window, select Filter by for Reviewed Swiss-Prot in the left column and click the Download button in the middle of the page, select Format: Tab-separated and click Go to download the mapping file. Put the mapping file in data/annotation/intermediate and rename it to gene2uniprot.txt.
 
-2. 运行src/preprocessing/create_annotation.py程序。程序将输出处理好的HPO标注文件。
+2. Run the src/preprocessing/create_annotation.py. It will output the processed HPO annotation files.
 
-3. 重复上述两步，分别处理得到三个标注文件(比如2021-04-13、2022-04-14和2024-04-26)。
+3. Repeat the two steps above to process each to get three annotation files (e.g., 2021-04-13, 2022-04-14, and 2024-04-26).
 
-4. 从https://bioportal.bioontology.org/ontologies/HP下载三个时期相对应的.obo文件，将其放在data/obo目录下。之后运行src/preprocessing/split_dataset.py。我们将得到：
+4. Download the .obo files corresponding to the three periods from https://bioportal.bioontology.org/ontologies/HP and put them in the data/obo directory. Then run src/preprocessing/split_dataset.py. We will get:
 
-    处理好的用于训练基础分类器的标注、用于训练排序学习的标注和用于测试的标注
+    Processed annotations for training the base classifier, annotations for training sort learning and annotations for testing
 
-    上面三个标注文件中的蛋白质标识符列表
+    List of protein identifiers in the three annotation files above
 
-    用来标注蛋白质的HPO term列表
+    List of HPO terms used to annotate proteins
 
-    按照频率划分的各个小组内的HPO term列表
+    List of HPO terms within each group by frequency
 
-### 第二步：处理特征（Extracting Features）
+### Step2：Extracting Features
 
 #### TF-IDF-D2V
 
-   1. src/utils下的getText.py，使用蛋白质列表获取protein - text abstract对应，输出的.pkl是原始语料，.json经过简单日期整理。
+   1. Run getText.py in src/utils to obtain the protein-text abstract correspondence using the protein list. The output .pkl is the original corpus, and .json is simply sorted by date.
 
-   2. src/utils下的textCombine.py，用于获取protein与经过去停用词、词形还原等操作之后的text-abstract的关联，每个protein关联的多个text-abstract进行拼接。
+   2. Run textCombine.py in src/utils to obtain the association between protein and text-abstract after operations such as removing stop words and restoring morphology. Multiple text-abstracts associated with each protein are spliced.
 
-   3. 获取到的protein - text文件，运行src/feature/TF-IDF/tf-idf.py和src/feature/D2V/d2v.py程序，得到在data/feature/TF-IDF/clean目录和data/feature/D2V/clean目录下的json格式的文件。
+   3. After obtaining the protein-text file, run src/feature/TF-IDF/tf-idf.py and src/feature/D2V/d2v.py programs to obtain json format files in the data/feature/TF-IDF/clean directory and data/feature/D2V/clean directory.
 
-   4. 运行src/feature/Text-Fusion/text-fusion.py程序，得到在data/feature/Text_fusion/clean目录下的json格式的文件。
+   4. Run src/feature/Text-Fusion/text-fusion.py program to obtain json format files in the data/feature/Text_fusion/clean directory.
 
 #### BioLinkBERT
 
-   1.去往https://huggingface.co/michiyasunaga/BioLinkBERT-large下载BioLinkBERT-large模型。
+   1. Go to https://huggingface.co/michiyasunaga/BioLinkBERT-large to download the BioLinkBERT-large model.
 
-   2. 利用上述得到的的protein - text文件运行src/feature/BioLinkBERT/biolinkbert_feature.py程序，得到在data/feature/BioLinkBERT/clean目录下的json格式的文件。
-
+   2. Use the protein-text file obtained above to run the src/feature/BioLinkBERT/biolinkbert_feature.py program to obtain a json file in the data/feature/BioLinkBERT/clean directory.
 
 #### STRING
 
-   1. 打开https://string-db.org/，然后点击页面左上角的Version，在自动跳转到的新页面中选择合适的版本，并单击Address一栏中的链接。之后，点击新页面上方导栏的Download按钮，点击choose an organism下拉菜单，选择Homo sapiens。现在，点击INTERACTION DATA部分的9606.protein.links.XXX.txt.gz（XXX为版本），下载蛋白质互作数据。最后，点击ACCESSORY DATA部分的mapping_files (download directory)，进入ftp页面，点击uniprot_mappings/目录，下载属于人类（可能是开头为9606或者文件名中有human字样）的压缩文件。上述两个文件都下载至data/feature/STRING/raw目录下。
+   1. Open https://string-db.org/, then click Version in the upper left corner of the page, select the appropriate version in the new page that automatically jumps to, and click the link in the Address column. After that, click the Download button in the top bar of the new page, click the choose an organism drop-down menu, and select Homo sapiens. Now, click 9606.protein.links.XXX.txt.gz (XXX is the version) in the INTERACTION DATA section to download the protein interaction data. Finally, click mapping_files (download directory) in the ACCESSORY DATA section, enter the ftp page, click the uniprot_mappings/ directory, and download the compressed file belonging to humans (it may start with 9606 or have the word human in the file name). Both of the above files are downloaded to the data/feature/STRING/raw directory.
 
-   2. 运行src/feature/STRING/string.py程序，得到在data/feature/STRING/clean目录下的json格式的文件。
+   2. Run the src/feature/STRING/string.py program to get the json format files in the data/feature/STRING/clean directory.
 
 #### GO Annotation
 
-   1. 首先，在https://www.ebi.ac.uk/GOA/downloads页面的Annotation Sets表格的Human一行中，点击某一个链接（若要下载当前最新数据，点击Current Files，否则点击Archive Files），然后下载合适版本的.gaf文件。
+   1. First, in the Human row of the Annotation Sets table on the https://www.ebi.ac.uk/GOA/downloads page, click a link (to download the latest data, click Current Files, otherwise click Archive Files), and then download the appropriate version of the .gaf file.
 
-   2. 若要下载最新版的GO的.obo文件，可从http://geneontology.org/docs/download-ontology/中下载；若要下旧版，则可以从https://bioportal.bioontology.org/ontologies/GO下载。
+   2. To download the latest version of GO's .obo file, you can download it from http://geneontology.org/docs/download-ontology/; if you want to download an older version, you can download it from https://bioportal.bioontology.org/ontologies/GO.
 
-   3. 运行src/feature/GO_annotation/go_annotation.py，得到在data/feature/GO_annotation/clean目录下的数据。
+   3. Run src/feature/GO_annotation/go_annotation.py to get the data in the data/feature/GO_annotation/clean directory.
 
 
 #### ESM2
 
-   1. 打开https://huggingface.co/facebook/esm2_t36_3B_UR50D，文件都下载至data/feature/ESM/raw目录下。
+   1. Open https://huggingface.co/facebook/esm2_t36_3B_UR50D and download all the files to the data/feature/ESM/raw directory.
 
-   2. 运行src/feature/ESM/esm2_feature_human.py程序，得到在data/feature/ESM/clean目录下的json格式的文件。
+   2. Run the src/feature/ESM/esm2_feature_human.py program to get the json format file in the data/feature/ESM/clean directory.
 
 
 #### Gene-Expression
 
-   1. 打开https://github.com/bio-ontology-research-group/deeppheno/，Expression Atlas Genotype-Tissue Expression (GTEx) Project (E-MTAB-5214) 文件都下载至data/feature/Gene_expression/raw目录下。
+   1. Open https://github.com/bio-ontology-research-group/deeppheno/ and download all Expression Atlas Genotype-Tissue Expression (GTEx) Project (E-MTAB-5214) files to the data/feature/Gene_expression/raw directory.
 
-   2. 运行src/feature/STRING/gene_expression.py程序，得到在data/feature/Gene_expression/clean目录下的json格式的文件。
+   2. Run the src/feature/STRING/gene_expression.py program to get the json format files in the data/feature/Gene_expression/clean directory.
 
 
 #### InterPro
 
-   1. 从http://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/选择合适的InterProScan程序包下载。
+   1. Download the appropriate InterProScan package from http://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/.
 
-   2. 进入下载后解压的目录内，以要查询的蛋白质的fasta文件为输入，运行InterProScan，得到程序匹配到的InterPro signatures的xml文件：
+   2. Enter the directory where you unzipped the downloaded file, use the fasta file of the protein to be queried as input, run InterProScan, and obtain the XML file of the InterPro signatures matched by the program:
 
       ./interproscan.sh -i /path/to/sequences.fasta -b /path/to/output_file -f XML
 
-   3. 运行src/feature/InterPro/interpro.py程序，处理上一步得到的原始xml文件，获得处理后的InterPro特征文件。
+   3. Run the src/feature/InterPro/interpro.py program to process the original XML file obtained in the previous step and obtain the processed InterPro feature file.
 
 
-
-### 第三步：训练基础分类器（Basic Models）
+### Step3：Train Basic Models
 
 #### Naive
 
-   1. 运行src/basic/naive/naive.py，得到data/result/basic/naive内的输出文件。
+   1. Run src/basic/naive/naive.py and get the output file in data/result/basic/naive.
 
 #### Neighbor
 
-   1. 注意设置配置文件里“network”一项的“type”，对于STRING，其设为“weighted。
+   1. Pay attention to the "type" of the "network" item in the configuration file. For STRING, it is set to "weighted.
 
-   2. 运行src/basic/neighbor/neighbor.py，得到保存在data/result/basic/neighbor中的预测结果。
+   2. Run src/basic/neighbor/neighbor.py and get the prediction results saved in data/result/basic/neighbor.
 
 #### Flat
 
-   1. 运行src/basic/flat/flat.py，将各种处理得到的特征文件作为输入，训练Logistic Regression分类器，对用于排序学习的训练集和测试集进行预测，得到输出在data/result/basic/flat目录下的一系列预测结果文件。
+   1. Run src/basic/flat/flat.py, use the feature files obtained from various processes as input, train the Logistic Regression classifier, predict the training set and test set used for ranking learning, and output a series of prediction result files in the data/result/basic/flat directory.
 
 #### DNN
 
-   1. 运行src/basic/dnn/dnn.py，将各种处理得到的特征文件作为输入，训练DNN分类器，对用于排序学习的训练集和测试集进行预测，得到输出在data/result/basic/dnn目录下的一系列预测结果文件。
+   1. Run src/basic/dnn/dnn.py, use the feature files obtained by various processing as input, train the DNN classifier, predict the training set and test set used for sorting learning, and output a series of prediction result files in the data/result/basic/dnn directory.
+
+### Step4：Learning to Rank
+
+   1. Take the series of prediction scores obtained in the third step as input, that is, the "result" part of the configuration file. Note: Please make sure that the order of the files in the "ltr" and "test" lists in this part is consistent!
+
+   2. Pay attention to reasonably adjust the max_depth value in the "model_param" part of the configuration file, num_boost_round and early_stopping_rounds in the "fit_param" part, and the value in "top".
+
+   3. Run the src/ensemble/ltr/ltr.py program to get the final prediction result.
+
+### Step5：Evaluation
 
 
-### 第四步：排序学习（Learning to Rank）
+   1. Add the file path of the prediction result to be evaluated to the "result" section of the configuration file.
 
-   1. 将第三步中得到的一系列预测分数作为输入，即配置文件中的"result"部分。注意：请务必保证这一部分的"ltr"和"test"的列表内的文件顺序是一致的！
+   2. Run src/utils/evaluation.py, and the program will display the prediction results on each sub-ontology
 
-   2. 注意合理调节配置文件中"model_param"部分的max_depth值、"fit_param"部分中的num_boost_round和early_stopping_rounds以及"top"中的取值。
+      Fmax: protein-centric evaluation metric
 
-   3. 运行src/ensemble/ltr/ltr.py程序，得到最终的预测结果。
+      AUC: HPO term-centric evaluation metric, that is, the average AUC of each HPO term
 
-### 第五步：评估（Evaluation）
+      AUPR: overall evaluation metric, that is, the AUPR calculated for a pair of protein-HPO terms
 
-   1. 将要评估的预测结果的文件路径添加在配置文件的"result"部分。
-
-   2. 运行src/utils/evaluation.py，程序将会显示各个预测结果在各个子本体上的
-
-       Fmax：以蛋白质为中心的评估指标
-
-       AUC：以HPO term为中心的评估指标，即每个HPO term的AUC的平均值
-
-       AUPR：整体的评估指标，即以一对蛋白质-HPO term为实例进行计算的AUPR
-
-       每个按频率划分的HPO term小组内的平均AUC
+      Average AUC within each frequency-divided HPO term group
